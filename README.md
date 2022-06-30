@@ -2,4 +2,4 @@
 Learning fullstack open course in University of Helsinki 
 
 ## Link
-(https://fullstackopen.com/)[https://fullstackopen.com/]
+https://fullstackopen.com/
