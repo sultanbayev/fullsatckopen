@@ -9,11 +9,19 @@ const SingleStat = ({ name, count }) => {
 }
 
 const Stats = ({ good, neutral, bad }) => {
+
+  const all = good + neutral + bad;
+  const average = (good * 1 + neutral * 0 + bad * (-1)) / all;
+  const positive = good * 100 / all;
+
   return (
     <p>
       <SingleStat name={"good"} count={good} /><br />
       <SingleStat name={"neutral"} count={neutral} /><br />
-      <SingleStat name={"bad"} count={bad} />
+      <SingleStat name={"bad"} count={bad} /><br />
+      <SingleStat name={"all"} count={all} /><br />
+      <SingleStat name={"average"} count={average} /><br />
+      <SingleStat name={"positive"} count={positive} /> %
     </p>
   );
 }
