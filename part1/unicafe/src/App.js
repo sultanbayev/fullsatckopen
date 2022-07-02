@@ -4,8 +4,8 @@ const Heading = ({ text }) => {
   return (<h1>{text}</h1>);
 }
 
-const SingleStat = ({ name, count }) => {
-  return (<>{name} {count}</>)
+const StatisticLine = ({ text, value }) => {
+  return (<>{text} {value}</>)
 }
 
 const Statistics = ({ good, neutral, bad }) => {
@@ -20,12 +20,12 @@ const Statistics = ({ good, neutral, bad }) => {
 
   return (
     <p>
-      <SingleStat name={"good"} count={good} /><br />
-      <SingleStat name={"neutral"} count={neutral} /><br />
-      <SingleStat name={"bad"} count={bad} /><br />
-      <SingleStat name={"all"} count={all} /><br />
-      <SingleStat name={"average"} count={average} /><br />
-      <SingleStat name={"positive"} count={positive} /> %
+      <StatisticLine text="good" value={good} /><br />
+      <StatisticLine text="neutral" value={neutral} /><br />
+      <StatisticLine text="bad" value={bad} /><br />
+      <StatisticLine text="all" value={all} /><br />
+      <StatisticLine text="average" value={average} /><br />
+      <StatisticLine text="positive" value={positive} /> %
     </p>
   );
 }
