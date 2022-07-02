@@ -6,6 +6,19 @@ const Button = ({ text, onClick }) => {
   );
 }
 
+const Heading = ({ text }) => {
+  return (<h1>{text}</h1>);
+}
+
+const Anecdote = ({ text, votes }) => {
+  return (
+    <div>
+      {text}<br />
+      has {votes} votes
+    </div>
+  );
+}
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -30,14 +43,16 @@ const App = () => {
     setVotes(copy);
   }
 
+  const maxVotesIndex = votes.indexOf(Math.max(...votes));
+
   return (
     <>
-      <div>
-        {anecdotes[selected]}<br />
-        has {votes[selected]} votes
-      </div>
+      <Heading text="Anecdote of the day" />
+      <Anecdote text={anecdotes[selected]} votes={votes[selected]} />
       <Button text="vote" onClick={handleVoteClick} />
       <Button text="next anecdote" onClick={handleNextClick} />
+      <Heading text="Anecdote with most votes" />
+      <Anecdote text={anecdotes[maxVotesIndex]} votes={votes[maxVotesIndex]} />
     </>
   )
 }
