@@ -10,6 +10,10 @@ const SingleStat = ({ name, count }) => {
 
 const Statistics = ({ good, neutral, bad }) => {
 
+  if (good + neutral + bad === 0) {
+    return (<p>No feedback given</p>);
+  }
+
   const all = good + neutral + bad;
   const average = (good * 1 + neutral * 0 + bad * (-1)) / all;
   const positive = good * 100 / all;
