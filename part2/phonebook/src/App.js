@@ -12,6 +12,13 @@ const App = () => {
     if (!newName) {
       return;
     }
+
+    const match = persons.filter(person => person.name === newName);
+    if (match.length > 0) {
+      alert(`${newName} is already added to phonebook`);
+      return;
+    }
+    
     setPersons([...persons, { name: newName }]);
     setNewName('');
   }
