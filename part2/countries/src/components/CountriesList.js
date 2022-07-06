@@ -1,7 +1,14 @@
-const CountriesList = ({ countries }) => {
+const CountriesList = ({ countries, setFilter }) => {
     return (
         <div>
-            { countries.map(c => <p key={c.ccn3}>{c.name.common}</p>) }
+            { countries.map(country => {
+                return (
+                    <div key={country.ccn3}>
+                        {country.name.common}
+                        <button onClick={() => setFilter(country.name.common)}>show</button>
+                    </div>
+                );
+            }) }
         </div>
     );
 }

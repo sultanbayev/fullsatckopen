@@ -19,7 +19,7 @@ function App() {
     setFilter(event.target.value);
   }
 
-  const countriesToShow = filter && countries.filter(c => c.name.common.toLowerCase().includes(filter));
+  const countriesToShow = filter && countries.filter(c => c.name.common.toLowerCase().includes(filter.toLowerCase()));
   
   const getCountries = () => {
     const length = countriesToShow.length;
@@ -31,7 +31,7 @@ function App() {
     if (length === 1) {
       return (<Country country={countriesToShow[0]} />);
     } else if (length > 1 && length <= 10 ) {
-      return <CountriesList countries={countriesToShow} />
+      return <CountriesList countries={countriesToShow} setFilter={setFilter} />
     } else {
       return (<p>Too many matches, specify another filter</p>);
     }
