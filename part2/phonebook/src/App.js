@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import Filter from './components/Filter';
+import Notification from './components/Notification';
 import PersonForm from './components/PersonForm';
 import Persons from './components/Persons';
 import personService from './services/persons';
@@ -9,6 +10,8 @@ const App = () => {
   const [newName, setNewName] = useState('');
   const [newNumber, setNewNumber] = useState('');
   const [filter, setFilter] = useState('');
+  const [notification, setNotification] = useState(null);
+  const [status, setStatus] = useState('success');
 
   useEffect(() => {
     personService
@@ -36,9 +39,16 @@ const App = () => {
       .then(returnedPerson => {
         const updatedPersons = [ ...persons, returnedPerson ];
         setPersons(updatedPersons);
+
+        setStatus('success');
+        setNotification(`Added ${newName}`);
+        setTimeout(() => {
+          setNotification(null)
+        }, 5000);
+
+        setNewName('');
+        setNewNumber('');
       })
-    setNewName('');
-    setNewNumber('');
   }
 
   const updatePerson = (person) => {
@@ -53,9 +63,26 @@ const App = () => {
       .then(returnedPerson => {
         const updatedPersons = persons.map(p => p.id !== returnedPerson.id ? p : returnedPerson);
         setPersons(updatedPersons);
+
+        setStatus('success');
+        setNotification(`Number of ${newName} has been updated`);
+        setTimeout(() => {
+          setNotification(null)
+        }, 5000);
+
+        setNewName('');
+        setNewNumber('');
       })
-    setNewName('');
-    setNewNumber('');
+      .catch(error => {
+        setStatus('error');
+        setNotification(`Information of ${person.name} has already been removed from server`);
+        setTimeout(() => {
+          setNotification(null)
+        }, 5000);
+
+        const filtered = persons.filter(p => p.id !== person.id);
+        setPersons(filtered);
+      })
   }
 
   const deletePersonOf = (person) => {
@@ -89,6 +116,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification status={status} message={notification} />
       <Filter filter={filter} onChange={handleFilterChange} />
       <h3>Add a new</h3>
       <PersonForm
