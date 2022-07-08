@@ -1,4 +1,4 @@
-# fullsatckopen
+# fullstackopen
 Learning fullstack open course in University of Helsinki 
 
 ## Link
