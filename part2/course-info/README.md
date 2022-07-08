@@ -1,3 +1,3 @@
-# Exercises 1.1.-1.2.
+# Exercises 2.1.-2.5.
 
-https://fullstackopen.com/en/part1/introduction_to_react#exercises-1-1-1-2
+https://fullstackopen.com/en/part2/rendering_a_collection_modules#exercises-2-1-2-5
