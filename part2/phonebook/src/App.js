@@ -49,6 +49,13 @@ const App = () => {
         setNewName('');
         setNewNumber('');
       })
+      .catch(error => {
+        setStatus('error');
+        setNotification(error.response.data.error);
+        setTimeout(() => {
+          setNotification(null)
+        }, 5000);
+      })
   }
 
   const updatePerson = (person) => {
@@ -74,14 +81,22 @@ const App = () => {
         setNewNumber('');
       })
       .catch(error => {
-        setStatus('error');
-        setNotification(`Information of ${person.name} has already been removed from server`);
-        setTimeout(() => {
-          setNotification(null)
-        }, 5000);
+        if (error.response.status === 404) {
+          setStatus('error');
+          setNotification(`Information of ${person.name} has already been removed from server`);
+          setTimeout(() => {
+            setNotification(null)
+          }, 5000);
 
-        const filtered = persons.filter(p => p.id !== person.id);
-        setPersons(filtered);
+          const filtered = persons.filter(p => p.id !== person.id);
+          setPersons(filtered);
+        } else {
+          setStatus('error');
+          setNotification(error.response.data.error || error.message);
+          setTimeout(() => {
+            setNotification(null)
+          }, 5000);
+        }
       })
   }
 
